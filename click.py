@@ -12,7 +12,7 @@ driver = webdriver.Chrome(chrome_path)
 driver.get('https://www.starbucks.co.kr/menu/drink_list.do')
 
 # 여기서부터 for문
-MAX = 15
+MAX = 100 
 
 for i in range(1,MAX):
 	try:
