@@ -3,10 +3,10 @@ from bs4 import BeautifulSoup
 import requests
 import csv
 
-csv_filename = "starbucks.csv"
-csv_open = open(csv_filename, '+w', encoding='utf-8')
-csv_write = csv.writer(csv_open)
-csv_write.writerow(('Drink', 'Image'))
+#csv_filename = "starbucks.csv"
+#csv_open = open(csv_filename, '+w', encoding='utf-8')
+#csv_write = csv.writer(csv_open)
+#csv_write.writerow(('Drink', 'Image'))
 
 chrome_path = "/usr/bin/chromedriver"
 driver = webdriver.Chrome(chrome_path)
@@ -26,13 +26,20 @@ img_tags = soup.select('.goDrinkView > img')
 #print(title)
 #print(drinks)
 
-for tag in img_tags:
-    img_link = tag['src']
-#    print(f'img link: {img_link}')
-    coffee = tag['alt']
-#   print(f'coffee: {coffee}')
-    csv_write.writerow((coffee, img_link))
 
-csv_open.close()
+# with open 사용해보기
+with open('starbucks.csv', 'w+', encoding='utf-8') as starbucks:
+
+    csv_writer = csv.writer(starbucks)
+    csv_writer.writerow(('Drink', 'Image'))
+
+    for tag in img_tags:
+        img_link = tag['src']
+    #    print(f'img link: {img_link}')
+        coffee = tag['alt']
+    #   print(f'coffee: {coffee}')
+        csv_writer.writerow((coffee, img_link))
+
+#csv_open.close()
 
 
